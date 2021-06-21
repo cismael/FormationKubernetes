@@ -1,3 +1,4 @@
+## POD
 ### CREATE POD
 kubectl apply -f pod-station-simulator.yml
 
@@ -8,7 +9,7 @@ kubectl delete -f pod-station-simulator.yml [or] kubectl delete pod my-app
 kubectl get pod
 
 ### SHOW PODS FROM ALL NAMESPACES
-kubectl get pod --all-namespaces
+kubectl get pod --all-namespaces [or] kubectl get pod -A
 
 ### CONNEXION TO THE POD
 kubectl exec -it my-pod -- sh
@@ -21,4 +22,3 @@ kubectl delete my-pod -n namespace-name
 
 ### DESCRIBE A POD
 kubectl describe pod my-pod
-
