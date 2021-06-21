@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: meteo-service-loadbalancer
+spec:
+  selector:
+    app: meteo
+    module: station-simulator
+  type: LoadBalancer # Ouvre sur l'extérieur avec une IP Publique => payant
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: mon-port-http
