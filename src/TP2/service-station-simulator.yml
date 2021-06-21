@@ -6,7 +6,7 @@ spec:
   selector:
     app: meteo
     module: station-simulator
-  type: ClusterIP #Inutile car c'est le type par défaut
+  type: ClusterIP # Inutile car c'est le type par défaut
   ports:
     - protocol: TCP
       port: 80
