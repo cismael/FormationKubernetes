@@ -11,3 +11,4 @@ spec:
       image: eu.gcr.io/formation-k8s-247908/station-simulator:latest
       ports:
         - containerPort: 8080
+          name : mon-port-http

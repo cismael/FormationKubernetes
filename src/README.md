@@ -22,3 +22,14 @@ kubectl delete my-pod -n namespace-name
 
 ### DESCRIBE A POD
 kubectl describe pod my-pod
+
+## SERVICE
+### CREATE SERVICE
+kubectl apply -f service-station-simulator.yml
+
+### DELETE SERVICE
+kubectl delete svc my-service
+
+### SHOW MY SERVICES
+kubectl get service [or] kubectl get services [or] kubectl get svc
+
