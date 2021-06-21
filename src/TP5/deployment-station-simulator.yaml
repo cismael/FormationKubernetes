@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: station-simulator-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      module: backend
+  template:
+    metadata:
+      labels:
+        module: backend
+    spec:
+      containers:
+        - name: my-app
+          image: eu.gcr.io/formation-k8s-247908/station-simulator:latest
+          ports:
+            - containerPort: 80
+              name : mon-port-http-2
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+spec:
+  selector:
+    module: backend
+  type: ClusterIP # Inutile car c'est le type par défaut
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: mon-port-http-2
