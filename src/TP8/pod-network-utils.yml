@@ -1,35 +1,22 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: my-pod-network-utils
+  name: busybox
   labels:
-    app: my-app-network-utils
+    app: my-app-with-pvc
     #module: station-simulator
 spec:
   containers:
-    - name: mycontainer
+    - name: mycontainer-with-pvc
       image: amouat/network-utils
       ports:
         - containerPort: 8080
           name : mon-port-http
       command: ['sh', '-c', 'trap : TERM INT; sleep infinity & wait']
-      env:
-        - name: SECRET_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: my-secret
-              key: username
-        - name: SECRET_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: my-secret
-              key: password
       volumeMounts:
-        - name: secret-volume
-          readOnly: true
-          mountPath: "/etc/secret-volume"
+        - name: my-volume-with-pvc
+          mountPath: "/etc/my-volume-with-pvc"
   volumes:
-    - name: secret-volume
-      secret:
-        secretName: my-secret
-        defaultMode: 256
+    - name: my-volume-with-pvc
+      persistentVolumeClaim:
+        claimName: my-pvc-001
