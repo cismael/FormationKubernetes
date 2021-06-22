@@ -1,0 +1,3 @@
+city:nantes
+name:jon doe nantes
+age:19

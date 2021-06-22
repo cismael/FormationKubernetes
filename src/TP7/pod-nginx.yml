@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod-for-configmap-2
+  labels:
+    app: my-app-for-configmap-2
+spec:
+  containers:
+    - name: my-app-for-configmap-2
+      image: nginx:1.17.4
+      volumeMounts:
+        - name: config-volume
+          mountPath: /etc/config
+  volumes:
+    - name: config-volume
+      configMap:
+        name: my-conf

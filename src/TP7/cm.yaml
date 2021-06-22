@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  configmap-1.txt: "city:nantes\r\nname:jon doe nantes\r\nage:19"
+  configmap-2.json: "{\r\n  \"city\":\"paris\",\r\n  \"name\":\"jon doe paris\",\r\n
+    \ \"age\":\"21\"\r\n}"
+  configmap-3.properties: "city=chicago\r\nname=jon doe chicago\r\nage=20"
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: my-conf
