@@ -45,3 +45,11 @@ kubectl describe deploy
 
 ### DELETE DEPLOY
 kubectl delete deploy my-deploy-name
+
+## CONFIGMAP
+### SHOW MY CONFIGMAP
+kubectl get cm [or] kubectl get configmap
+
+### DESCRIBE A CONFIGMAP
+kubectl describe cm
+
