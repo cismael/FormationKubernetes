@@ -4,7 +4,6 @@ metadata:
   name: my-pod
   labels:
     app: my-app
-    #module: station-simulator
 spec:
   containers:
     - name: my-app

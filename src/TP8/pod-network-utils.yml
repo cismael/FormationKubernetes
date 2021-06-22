@@ -4,7 +4,6 @@ metadata:
   name: busybox
   labels:
     app: my-app-with-pvc
-    #module: station-simulator
 spec:
   containers:
     - name: mycontainer-with-pvc
