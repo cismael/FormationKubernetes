@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: data-editor
+  labels:
+    app: my-app-data-editor
+    #module: station-simulator
+spec:
+  containers:
+    - name: mycontainer-with-pvc
+      image: amouat/network-utils
+      ports:
+        - containerPort: 8080
+          name : mon-port-http
+      command: ['sh', '-c', 'trap : TERM INT; sleep infinity & wait']
+      volumeMounts:
+        - name: my-volume-data-editor
+          mountPath: "/data"
+  volumes:
+    - name: my-volume-data-editor
+      persistentVolumeClaim:
+        claimName: static-web-site
