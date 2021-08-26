@@ -8,6 +8,7 @@ spec:
   containers:
     - name: my-app-for-configmap-2
       image: nginx:1.17.4
+      imagePullPolicy: Always
       volumeMounts:
         - name: config-volume
           mountPath: /etc/config

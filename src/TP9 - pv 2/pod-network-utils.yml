@@ -8,6 +8,7 @@ spec:
   containers:
     - name: mycontainer-with-pvc
       image: amouat/network-utils
+      imagePullPolicy: Always
       ports:
         - containerPort: 8080
           name : mon-port-http

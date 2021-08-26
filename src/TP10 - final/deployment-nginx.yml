@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: final-tp-deploy-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      module: my-module-nginx
+  template:
+    metadata:
+      labels:
+        module: my-module-nginx
+    spec:
+      containers:
+        - name: my-nginx
+          image: nginx:1.17.4
+          ports:
+            - containerPort: 80
+              name: port-http-nginx
+          volumeMounts:
+            - name: config-volume-final-tp
+              mountPath: /etc/nginx/conf.d/
+      volumes:
+        - name: config-volume-final-tp
+          configMap:
+            name: my-configmap-final-tp
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: final-tp-service
+spec:
+  selector:
+    app: meteo
+    module: my-module-nginx
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: port-http-nginx

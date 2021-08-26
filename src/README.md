@@ -1,3 +1,23 @@
+## Object
+### SHOW AND CHANGE CONTEXT
+kubectl config get-contexts
+kubectl config use-context docker-desktop
+
+### Warning
+kubectl get --raw
+
+### Install NGINX Ingress controller
+https://kubernetes.github.io/ingress-nginx/deploy/#docker-desktop
+
+### SHOW ALL OBJECTS
+kubectl get all
+
+### DELETE ALL OBJECTS
+kubectl delete all
+
+### DELETE ALL OBJECTS FROM FILES
+kubectl delete -f .
+
 ## POD
 ### CREATE POD
 kubectl apply -f pod-station-simulator.yml

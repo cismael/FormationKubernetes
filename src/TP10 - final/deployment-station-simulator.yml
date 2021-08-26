@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: final-tp-deploy-station-simulator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      module: my-module-station-simulator
+  template:
+    metadata:
+      labels:
+        module: my-module-station-simulator
+    spec:
+      containers:
+        - name: my-station-simulator
+          image: eu.gcr.io/formation-k8s-247908/station-simulator:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: port-http-sts
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          env:
+            - name: JDBC_URL
+              valueFrom:
+                secretKeyRef:
+                  name: my-jdbc-url
+                  key: my-secret-final-tp
+            - name: DB_USER_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: my-db-username
+                  key: my-secret-final-tp
+            - name: DB_USER_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: my-db-pwd
+                  key: my-secret-final-tp
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            capabilities:
+              drop:
+                - all
+              #add: ["..."]
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: final-tp-service-station-simulator
+spec:
+  selector:
+    module: my-module-station-simulator
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: port-http-sts

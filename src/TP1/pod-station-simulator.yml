@@ -13,6 +13,7 @@ spec:
   containers:
     - name: my-app
       image: eu.gcr.io/formation-k8s-247908/station-simulator:latest
+      imagePullPolicy: Always
       ports:
         - containerPort: 8080
           name : mon-port-http
@@ -23,10 +24,10 @@ spec:
         limits:
           memory: "128Mi"
           cpu: "500m"
-        securityContext:
-          allowPrivilegeEscalation: false
-          runAsNonRoot: true
-          capabilities:
-            drop:
-              - all
-            #add: ["..."]
+      securityContext:
+        allowPrivilegeEscalation: false
+        runAsNonRoot: true
+        capabilities:
+          drop:
+            - all
+          #add: ["..."]

@@ -8,12 +8,29 @@ spec:
   containers:
     - name: bastion
       image: amouat/network-utils
+      imagePullPolicy: Always
       ports:
         - containerPort: 8080
           name: mon-port-http
       command: [ 'sh', '-c', 'trap : TERM INT; sleep infinity & wait' ]
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      securityContext:
+        allowPrivilegeEscalation: false
+        runAsNonRoot: true
+        capabilities:
+          drop:
+            - all
+          #add: ["..."]
+
     - name: web-server
       image: nginx:1.17.4
+      imagePullPolicy: Always
       ports:
         - containerPort: 8080
           name: mon-port-http
@@ -34,6 +51,7 @@ spec:
           drop:
             - all
           #add: ["..."]
+
   volumes:
     - name: my-volume-mon-web-server
       persistentVolumeClaim:
