@@ -20,6 +20,20 @@ spec:
       volumeMounts:
         - name: my-volume-mon-web-server
           mountPath: "/usr/share/nginx/html"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      securityContext:
+        allowPrivilegeEscalation: false
+        runAsNonRoot: true
+        capabilities:
+          drop:
+            - all
+          #add: ["..."]
   volumes:
     - name: my-volume-mon-web-server
       persistentVolumeClaim:

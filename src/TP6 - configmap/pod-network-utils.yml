@@ -21,3 +21,17 @@ spec:
       envFrom:
         - configMapRef:
             name : my-configmap-2
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      securityContext:
+        allowPrivilegeEscalation: false
+        runAsNonRoot: true
+        capabilities:
+          drop:
+            - all
+          #add: ["..."]

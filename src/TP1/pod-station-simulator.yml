@@ -6,9 +6,27 @@ metadata:
     app: meteo
     module: station-simulator
 spec:
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 3000
+    fsGroup: 2000
   containers:
     - name: my-app
       image: eu.gcr.io/formation-k8s-247908/station-simulator:latest
       ports:
         - containerPort: 8080
           name : mon-port-http
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          capabilities:
+            drop:
+              - all
+            #add: ["..."]

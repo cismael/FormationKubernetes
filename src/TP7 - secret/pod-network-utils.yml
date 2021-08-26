@@ -5,9 +5,14 @@ metadata:
   labels:
     app: my-app-network-utils
 spec:
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 3000
+    fsGroup: 2000
   containers:
     - name: mycontainer
       image: amouat/network-utils
+      imagePullPolicy: Always
       ports:
         - containerPort: 8080
           name : mon-port-http
@@ -27,6 +32,20 @@ spec:
         - name: secret-volume
           readOnly: true
           mountPath: "/etc/secret-volume"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      securityContext:
+        allowPrivilegeEscalation: false
+        runAsNonRoot: true
+        capabilities:
+          drop:
+            - all
+          #add: ["..."]
   volumes:
     - name: secret-volume
       secret:

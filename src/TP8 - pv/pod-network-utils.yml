@@ -15,6 +15,20 @@ spec:
       volumeMounts:
         - name: my-volume-with-pvc
           mountPath: "/etc/my-volume-with-pvc"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      securityContext:
+        allowPrivilegeEscalation: false
+        runAsNonRoot: true
+        capabilities:
+          drop:
+            - all
+          #add: ["..."]
   volumes:
     - name: my-volume-with-pvc
       persistentVolumeClaim:

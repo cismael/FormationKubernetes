@@ -4,7 +4,6 @@ metadata:
   name: data-editor
   labels:
     app: my-app-data-editor
-    #module: station-simulator
 spec:
   containers:
     - name: mycontainer-with-pvc
@@ -16,6 +15,20 @@ spec:
       volumeMounts:
         - name: my-volume-data-editor
           mountPath: "/data"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      securityContext:
+        allowPrivilegeEscalation: false
+        runAsNonRoot: true
+        capabilities:
+          drop:
+            - all
+          #add: ["..."]
   volumes:
     - name: my-volume-data-editor
       persistentVolumeClaim:
